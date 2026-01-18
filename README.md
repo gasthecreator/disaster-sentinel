@@ -66,4 +66,43 @@ source venv/bin/activate  # macOS/Linux
 
 pip install -r requirements.txt
 uvicorn main:app --reload
+```
 
+---
+
+## 🧠 Implementation Notes
+
+- Disaster events are fetched from GDACS every 30 minutes  
+- User proximity is evaluated every 5 minutes  
+- Alerts are rate-limited per user (default: one alert every 6 hours)  
+- If latitude/longitude is not provided during subscription:
+  - The service attempts IP-based geolocation
+  - Falls back to a default location when unavailable
+- Application state is persisted under the `data/` directory to survive restarts
+
+---
+
+## 🏆 Hackathon Context
+
+- Event: BE Smart Hackathon  
+- Result: Top 5 out of 64 teams  
+- Focus: AI-driven systems for real-world impact  
+
+This backend was built during a 24-hour sprint, prioritizing correctness, clarity, and resilience over production polish.
+
+---
+
+## 📌 Future Improvements
+
+- Persistent database integration  
+- Authentication and authorization  
+- Real push notification delivery  
+- Horizontal scaling and distributed scheduling  
+- Frontend or mobile client integration  
+
+---
+
+## 👤 Author
+
+Gideon Adeniyi Sanni  
+Computer Science Student | Backend & AI-focused Engineer  
