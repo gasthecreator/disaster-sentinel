@@ -1,57 +1,69 @@
-### TL;DR 🚨 
-This is a repository template containing all the information that needs to accompany your project.
+# 🚨 Disaster Sentinel
 
-Feel free to use any languages or frameworks, but the following information must be filled out in your project's README before hacking ends.
-_______________
-_______________
+Disaster Sentinel is a backend service designed to detect, classify, and respond to disaster events in near real time using user location data. Built during the BE Smart Hackathon (Top 5 of 64 teams), the system focuses on delivering timely, location-aware alerts instead of broad, generic warnings.
 
-# Project Name
+This repository reflects the backend implementation and experimental features I developed during the hackathon under extreme time constraints.
 
-## Challenge Statement(s) Addressed 🎯
-**...include the challenge statement(s) the project worked to address**
+---
 
-Examples:
-* How might we decrease the United States chances of alien and monster attacks given what we know from popular alien and monster movies?
-* How might we ....
+## 🧠 Problem Statement
 
-## Project Description 🤯
-**....at least 3 sentences describing what the project does and how it works**
+During disaster events, alerts are often delayed, overly broad, or irrelevant to a user’s actual location. This reduces trust and slows response time. Disaster Sentinel addresses a core question:
 
-## Project Value 💰
-**....at least 3 sentences describing your target customer and tangible benefits from your solution**
+How can we deliver accurate disaster alerts that are specific to where a user actually is?
 
-## Tech Overview 💻
-**... what tech was used to bring this project to life?**
+---
 
-Example:
-* FastAPI
-* Hugging Face AI Models
-* Next.js
-* Java
-* ReactJS
+## ⚙️ What Disaster Sentinel Does
 
-### Link to Demo Presentation 📽
-**...point us to your PPT or Canva slides 😍**
+- Ingests user location data during subscription
+- Fetches live disaster events from the GDACS API
+- Caches disaster events locally for resiliency and offline tolerance
+- Computes distance-based risk levels per user
+- Classifies proximity into actionable alert categories
+- Runs scheduled background jobs for event refresh and alert processing
+- Exposes REST endpoints for frontend or mobile integration
 
-### Team Checklist ✅
-- [ ] Team photo
-- [ ] Team Slack channel
-- [ ] Communication established with mentor
-- [ ] Repo creation from this template
-- [ ] Flight Deck registration
+---
 
-### Project Checklist 🏁
-- [ ] Presentation complete and linked
-- [ ] Code merged to main branch
+## 🧩 My Contribution (Backend)
 
-### School Name 🏫
-The ABC School
+This repository contains my individual backend contribution, including:
 
-### Team Name 🏷
-Coding Costars
+- User subscription and location ingestion logic
+- IP-based geolocation fallback when coordinates are not provided
+- Proximity and distance calculations using geodesic distance
+- Risk tier classification based on disaster type and radius thresholds
+- Scheduled background processing using APScheduler
+- Lightweight JSON-based persistence for users, alerts, and cached events
+- Rate-limited alert delivery to prevent notification spam
 
-### ✨ Contributors ✨
-**...tell the world who you and your team are 🙂**
-* Team member X 
-* Team member Y 
-* Team member Z 
+Due to rapid iteration and late-stage pivots during the hackathon, not all backend components were merged into the final team submission. This repository preserves the backend work as developed and tested during the event.
+
+---
+
+## 🛠️ Tech Stack
+
+- Python
+- FastAPI
+- APScheduler
+- Geopy (distance calculations)
+- GDACS Disaster Events API
+- RESTful APIs
+- JSON file-based persistence
+
+---
+
+## 🧪 Running the Project Locally
+
+```bash
+git clone https://github.com/gasthecreator/disaster-sentinel.git
+cd disaster-sentinel
+
+python -m venv venv
+source venv/bin/activate  # macOS/Linux
+# venv\Scripts\activate   # Windows
+
+pip install -r requirements.txt
+uvicorn main:app --reload
+
